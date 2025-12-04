@@ -52,7 +52,7 @@ const ShoppingCart = () => {
   const [itemToRemove, setItemToRemove] = useState<string | null>(null);
 
   // Helper function to safely get cosmetic ID
-  const getCosmeticId = (item: any) =>
+  const getCosmeticId = (item: unknown) =>
     item.cosmetic?._id || item.cosmeticId || "";
 
   const shipping = useMemo(

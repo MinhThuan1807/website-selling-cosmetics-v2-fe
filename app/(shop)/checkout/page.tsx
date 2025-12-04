@@ -122,7 +122,7 @@ const Checkout = () => {
       toast.success("Đặt hàng thành công!");
       // Redirect to order success page
       router.push("/");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Order creation error:", error);
       toast.error(error?.message || "Đặt hàng thất bại!");
     }

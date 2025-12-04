@@ -34,7 +34,7 @@ import { useEffect } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { SocketProvider } from "@/lib/socket/SocketContext";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const menuItems = [
     {
       id: "dashboard",
@@ -147,4 +147,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;

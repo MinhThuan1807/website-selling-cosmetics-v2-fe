@@ -35,7 +35,7 @@ import { Lens } from "@/components/ui/lens";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-const cosmeticDetail = () => {
+const CosmeticDetail = () => {
   const params = useParams();
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -208,9 +208,7 @@ const cosmeticDetail = () => {
         {/* cosmetic Images */}
         <div className="space-y-4">
           <div className="aspect-square overflow-hidden rounded-lg border border-border relative w-full h-[400px] md:h-[450px] lg:h-[500px]">
-
-            <Lens hovering={hovering} setHovering={setHovering}>
-                <img
+                <Image
                   src={cosmetic?.image || ""}
                   alt={cosmetic?.nameCosmetic || "cosmetic Image"}
                   width={500}
@@ -220,9 +218,6 @@ const cosmeticDetail = () => {
                     isOutOfStock ? "grayscale" : ""
                   }`}
                 />
-            </Lens>
-    
-
             {/* Out of Stock Overlay */}
             {isOutOfStock && (
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -470,4 +465,4 @@ const cosmeticDetail = () => {
     </div>
   );
 };
-export default cosmeticDetail;
+export default CosmeticDetail;
