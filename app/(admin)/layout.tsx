@@ -1,0 +1,150 @@
+"use client";
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/animate-ui/components/radix/sidebar";
+import {
+  BarChart3,
+  Users,
+  ShoppingCart,
+  Package,
+  Settings,
+  LogOut,
+  MessageCircle,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
+import "./admin.css";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/lib/redux/store";
+import {
+  logoutAdminApi,
+  selectCurrentAdmin,
+} from "@/lib/redux/admin/adminSlice";
+import { useEffect } from "react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { SocketProvider } from "@/lib/socket/SocketContext";
+
+const layout = ({ children }: { children: React.ReactNode }) => {
+  const menuItems = [
+    {
+      id: "dashboard",
+      href: "/dashboard",
+      label: "Dashboard",
+      icon: BarChart3,
+    },
+    { id: "account", href: "/account", label: "Account", icon: Users },
+    { id: "orders", href: "/order", label: "Order", icon: ShoppingCart },
+    { id: "products", href: "/cosmetic", label: "Cosmetic", icon: Package },
+    { id: "chat", href: "/chat", label: "Chat", icon: MessageCircle },
+    { id: "settings", href: "/setting", label: "Setting", icon: Settings },
+  ];
+  const pathname = usePathname();
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const currentAdmin = useSelector(selectCurrentAdmin);
+
+  //Redirect if not logged in
+  useEffect(() => {
+    if (!currentAdmin) {
+      router.push("/admin/login");
+    }
+  }, [currentAdmin, router]);
+
+  const handleLogout = async () => {
+    if (confirm("Are you sure you want to logout?")) {
+      await dispatch(logoutAdminApi());
+      router.push("/admin/login");
+    }
+  };
+
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  // Don't render if not logged in
+  if (!currentAdmin) {
+    return null;
+  }
+
+  return (
+    <SocketProvider>
+      <SidebarProvider>
+        <div className="flex h-screen w-full">
+          <Sidebar>
+            <SidebarHeader className="border-b border-sidebar-border p-4">
+              <div className="flex items-center gap-2">
+                <Package className="h-6 w-6" />
+                <span className="font-semibold">Beauty Admin</span>
+              </div>
+            </SidebarHeader>
+
+            <SidebarContent className="p-2">
+              <SidebarMenu>
+                {menuItems.map((item) => (
+                  <SidebarMenuItem key={item.id}>
+                    <Link href={item.href}>
+                      <SidebarMenuButton
+                        isActive={pathname === item.id}
+                        className="w-full justify-start"
+                      >
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.label}</span>
+                      </SidebarMenuButton>
+                    </Link>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarContent>
+
+            <SidebarFooter className="border-t border-sidebar-border p-4 space-y-4">
+              {/* Admin Info */}
+              <div className="flex items-center gap-3 px-2">
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback className="bg-primary text-primary-foreground">
+                    {getInitials(currentAdmin?.username || "AD")}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate">
+                    {currentAdmin?.username || "Admin"}
+                  </p>
+                  <p className="text-xs text-muted-foreground truncate">
+                    {currentAdmin?.email || ""}
+                  </p>
+                </div>
+              </div>
+              {/* Logout Button */}
+              <Button
+                variant="destructive"
+                size="sm"
+                className="w-full"
+                onClick={handleLogout}
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            </SidebarFooter>
+          </Sidebar>
+          <div className="flex-1 overflow-auto bg-gray-50 p-6">{children}</div>
+        </div>
+      </SidebarProvider>
+    </SocketProvider>
+  );
+};
+
+export default layout;
