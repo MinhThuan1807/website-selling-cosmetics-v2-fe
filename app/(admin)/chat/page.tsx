@@ -116,9 +116,9 @@ export default function AdminChatPage() {
     setSelectedRoom(room);
     if (socket) {
       socket.emit("join_room", {
-        userId: currentAdmin?.data?._id,
+        userId: currentAdmin?._id,
         roomId: room.roomId,
-        userName: currentAdmin?.data?.fullname,
+        userName: currentAdmin?.fullName,
         userRole: "admin",
       });
 
@@ -131,8 +131,8 @@ export default function AdminChatPage() {
       return;
 
     const newMessage: Message = {
-      senderId: currentAdmin.data._id,
-      senderName: currentAdmin.data.fullName,
+      senderId: currentAdmin._id,
+      senderName: currentAdmin.fullName,
       senderRole: "admin",
       message: inputMessage,
       timestamp: new Date(),
@@ -141,8 +141,8 @@ export default function AdminChatPage() {
 
     socket.emit("send_message", {
       roomId: selectedRoom.roomId,
-      senderId: currentAdmin.data._id,
-      senderName: currentAdmin.data.fullName,
+      senderId: currentAdmin._id,
+      senderName: currentAdmin.fullName,
       senderRole: "admin",
       message: inputMessage,
     });
