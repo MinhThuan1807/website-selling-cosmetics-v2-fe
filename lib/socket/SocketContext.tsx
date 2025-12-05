@@ -20,7 +20,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const socketInstance = io(
-      process.env.NEXT_SOCKET_API_URL || "http://localhost:8080",
+      "https://api.beautyst.click",
       {
         path: '/beauty/',
         transports: ['websocket', 'polling'],
