@@ -41,6 +41,7 @@ const Checkout = () => {
 
   const [checkoutItems, setCheckoutItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const selectedCartItems = useSelector(selectCartItemsSelected);
   const selectedTotalPrice = useSelector(selectCartTotalPrice);
@@ -68,41 +69,46 @@ const Checkout = () => {
     },
   });
 
+  // ✅ Fix: Kiểm tra và load dữ liệu chỉ 1 lần
   useEffect(() => {
+    const loadCheckoutData = () => {
       try {
         const savedItems = sessionStorage.getItem("checkoutItems");
-        const savedTotal = sessionStorage.getItem("checkoutTotalPrice");
-        
+
         if (savedItems) {
           const parsedItems = JSON.parse(savedItems);
-          setCheckoutItems(parsedItems);
-          setIsLoading(false);
-        } else if (selectedCartItems.length > 0) {
-          // Fallback to Redux state
+          if (parsedItems.length > 0) {
+            setCheckoutItems(parsedItems);
+            setIsLoading(false);
+            return;
+          }
+        }
+
+        // Fallback to Redux state
+        if (selectedCartItems.length > 0) {
           setCheckoutItems(selectedCartItems);
           setIsLoading(false);
-        } else {
-          // Không có dữ liệu, redirect về cart
-          toast.error("Vui lòng chọn sản phẩm để thanh toán!");
-          setTimeout(() => {
-            router.push("/cart");
-          }, 1500);
+          return;
         }
-      } catch (error) {
-        console.error("Failed to load checkout data:", error);
-        toast.error("Có lỗi xảy ra!");
-        router.push("/cart");
-      }
-    }, []);
 
-    useEffect(() => {
-      if (!isLoading && checkoutItems.length === 0) {
+        // Không có dữ liệu
+        setShouldRedirect(true);
         toast.error("Vui lòng chọn sản phẩm để thanh toán!");
         setTimeout(() => {
           router.push("/cart");
         }, 1500);
+      } catch (error) {
+        console.error("Failed to load checkout data:", error);
+        toast.error("Có lỗi xảy ra!");
+        setShouldRedirect(true);
+        setTimeout(() => {
+          router.push("/cart");
+        }, 1500);
       }
-    }, [checkoutItems, isLoading, router]);
+    };
+
+    loadCheckoutData();
+  }, []); // ✅ Chỉ chạy 1 lần khi mount
 
   useEffect(() => {
     if (selectedAddress) {
@@ -151,15 +157,13 @@ const Checkout = () => {
       // Dispatch create order action
       await dispatch(createOrder(orderData)).unwrap();
 
-       // ✅ Xóa sessionStorage sau khi đặt hàng thành công
+      // ✅ Xóa sessionStorage sau khi đặt hàng thành công
       sessionStorage.removeItem("checkoutItems");
       sessionStorage.removeItem("checkoutTotalPrice");
-
 
       toast.success("Đặt hàng thành công!");
       // Redirect to order success page
       router.push("/profile");
-    
     } catch (error: any) {
       console.error("Order creation error:", error);
       toast.error(error?.message || "Đặt hàng thất bại!");
@@ -170,7 +174,7 @@ const Checkout = () => {
     return new Intl.NumberFormat("vi-VN").format(price) + " VNĐ";
   };
 
-   const itemsTotal = useMemo(() => {
+  const itemsTotal = useMemo(() => {
     return checkoutItems.reduce((total, item) => {
       return total + (item.cosmetic?.discountPrice || 0) * item.quantity;
     }, 0);
@@ -183,15 +187,33 @@ const Checkout = () => {
 
   const total = useMemo(() => itemsTotal + shipping, [itemsTotal, shipping]);
   // Nếu không có sản phẩm, hiển thị loading hoặc redirect
-  if (selectedCartItems.length === 0) {
+  if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-muted-foreground">Đang chuyển hướng...</p>
+        <div className="flex flex-col items-center justify-center min-h-[400px]">
+          <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-brand-deep-pink mb-4"></div>
+          <p className="text-muted-foreground font-inter">
+            Đang tải thông tin đơn hàng...
+          </p>
         </div>
       </div>
     );
   }
+
+  // ✅ Fix: Hiển thị khi đang redirect
+  if (shouldRedirect || checkoutItems.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col items-center justify-center min-h-[400px]">
+          <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-brand-deep-pink mb-4"></div>
+          <p className="text-muted-foreground font-inter">
+            Đang chuyển hướng...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Back Button */}
@@ -390,7 +412,6 @@ const Checkout = () => {
             />
           </DialogContent>
         </Dialog>
-        {/* ...existing code... */}
         <div className="lg:col-span-1">
           <Card className="border-border sticky top-24">
             <CardHeader>
@@ -401,7 +422,7 @@ const Checkout = () => {
             <CardContent className="space-y-4 pb-3">
               {/* Order Items */}
               <div className="space-y-4">
-                {selectedCartItems.map((item) => (
+                {checkoutItems.map((item) => (
                   <div key={item.cosmetic?._id} className="flex space-x-3">
                     <div className="w-16 h-16 overflow-hidden rounded-lg border border-border">
                       <Image
@@ -440,7 +461,7 @@ const Checkout = () => {
                     Tạm tính:
                   </span>
                   <span className="font-poppins font-medium">
-                    {formatPrice(selectedTotalPrice)}
+                    {formatPrice(itemsTotal)}
                   </span>
                 </div>
                 <div className="flex justify-between">
