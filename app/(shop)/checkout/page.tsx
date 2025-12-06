@@ -44,7 +44,6 @@ const Checkout = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const selectedCartItems = useSelector(selectCartItemsSelected);
-  const selectedTotalPrice = useSelector(selectCartTotalPrice);
   const createLoading = useSelector(selectCreateOrderLoading);
   const [showPayment, setShowPayment] = useState(false);
 
@@ -376,7 +375,7 @@ const Checkout = () => {
             <Button
               type="submit"
               disabled={
-                isSubmitting || createLoading || selectedCartItems.length === 0
+                isSubmitting || createLoading || checkoutItems.length === 0
               }
               className="w-full bg-brand-deep-pink hover:bg-brand-deep-pink/90 text-white font-poppins py-3 cursor-pointer"
               size="lg"
