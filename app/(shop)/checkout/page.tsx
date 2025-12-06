@@ -39,6 +39,9 @@ const Checkout = () => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
+  const [checkoutItems, setCheckoutItems] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const selectedCartItems = useSelector(selectCartItemsSelected);
   const selectedTotalPrice = useSelector(selectCartTotalPrice);
   const createLoading = useSelector(selectCreateOrderLoading);
@@ -66,11 +69,40 @@ const Checkout = () => {
   });
 
   useEffect(() => {
-    if (selectedCartItems.length === 0) {
-      toast.error("Vui lòng chọn sản phẩm để thanh toán!");
-      router.push("/cart");
-    }
-  }, [selectedCartItems, router]);
+      try {
+        const savedItems = sessionStorage.getItem("checkoutItems");
+        const savedTotal = sessionStorage.getItem("checkoutTotalPrice");
+        
+        if (savedItems) {
+          const parsedItems = JSON.parse(savedItems);
+          setCheckoutItems(parsedItems);
+          setIsLoading(false);
+        } else if (selectedCartItems.length > 0) {
+          // Fallback to Redux state
+          setCheckoutItems(selectedCartItems);
+          setIsLoading(false);
+        } else {
+          // Không có dữ liệu, redirect về cart
+          toast.error("Vui lòng chọn sản phẩm để thanh toán!");
+          setTimeout(() => {
+            router.push("/cart");
+          }, 1500);
+        }
+      } catch (error) {
+        console.error("Failed to load checkout data:", error);
+        toast.error("Có lỗi xảy ra!");
+        router.push("/cart");
+      }
+    }, []);
+
+    useEffect(() => {
+      if (!isLoading && checkoutItems.length === 0) {
+        toast.error("Vui lòng chọn sản phẩm để thanh toán!");
+        setTimeout(() => {
+          router.push("/cart");
+        }, 1500);
+      }
+    }, [checkoutItems, isLoading, router]);
 
   useEffect(() => {
     if (selectedAddress) {
@@ -103,7 +135,7 @@ const Checkout = () => {
         receiverAddress: data.receiverAddress,
         orderNotes: data.orderNotes,
         paymentMethod: data.paymentMethod,
-        items: selectedCartItems
+        items: checkoutItems
           .filter(
             (item) =>
               item.cosmetic?._id && item.cosmetic?.discountPrice !== undefined
@@ -119,10 +151,16 @@ const Checkout = () => {
       // Dispatch create order action
       await dispatch(createOrder(orderData)).unwrap();
 
+       // ✅ Xóa sessionStorage sau khi đặt hàng thành công
+      sessionStorage.removeItem("checkoutItems");
+      sessionStorage.removeItem("checkoutTotalPrice");
+
+
       toast.success("Đặt hàng thành công!");
       // Redirect to order success page
-      router.push("/");
-    } catch (error: unknown) {
+      router.push("/profile");
+    
+    } catch (error: any) {
       console.error("Order creation error:", error);
       toast.error(error?.message || "Đặt hàng thất bại!");
     }
@@ -132,16 +170,18 @@ const Checkout = () => {
     return new Intl.NumberFormat("vi-VN").format(price) + " VNĐ";
   };
 
+   const itemsTotal = useMemo(() => {
+    return checkoutItems.reduce((total, item) => {
+      return total + (item.cosmetic?.discountPrice || 0) * item.quantity;
+    }, 0);
+  }, [checkoutItems]);
+
   const shipping = useMemo(
-    () =>
-      selectedTotalPrice > 500000 ? 0 : selectedTotalPrice > 0 ? 30000 : 0,
-    [selectedTotalPrice]
+    () => (itemsTotal > 500000 ? 0 : itemsTotal > 0 ? 30000 : 0),
+    [itemsTotal]
   );
 
-  const total = useMemo(
-    () => selectedTotalPrice + shipping,
-    [selectedTotalPrice, shipping]
-  );
+  const total = useMemo(() => itemsTotal + shipping, [itemsTotal, shipping]);
   // Nếu không có sản phẩm, hiển thị loading hoặc redirect
   if (selectedCartItems.length === 0) {
     return (
