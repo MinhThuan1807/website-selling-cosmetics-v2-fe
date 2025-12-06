@@ -65,12 +65,12 @@ const Checkout = () => {
     },
   });
 
-  useEffect(() => {
-    if (selectedCartItems.length === 0) {
-      toast.error("Vui lòng chọn sản phẩm để thanh toán!");
-      router.push("/cart");
-    }
-  }, [selectedCartItems, router]);
+  // useEffect(() => {
+  //   if (selectedCartItems.length === 0) {
+  //     toast.error("Vui lòng chọn sản phẩm để thanh toán!");
+  //     router.push("/cart");
+  //   }
+  // }, [selectedCartItems, router]);
 
   useEffect(() => {
     if (selectedAddress) {
@@ -122,7 +122,7 @@ const Checkout = () => {
       toast.success("Đặt hàng thành công!");
       // Redirect to order success page
       router.push("/");
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error("Order creation error:", error);
       toast.error(error?.message || "Đặt hàng thất bại!");
     }
@@ -147,7 +147,7 @@ const Checkout = () => {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-muted-foreground">Đang chuyển hướng...</p>
+          <p className="text-muted-foreground">Không có sản phẩm để thanh toán</p>
         </div>
       </div>
     );

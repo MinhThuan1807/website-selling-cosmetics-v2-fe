@@ -52,7 +52,7 @@ const ShoppingCart = () => {
   const [itemToRemove, setItemToRemove] = useState<string | null>(null);
 
   // Helper function to safely get cosmetic ID
-  const getCosmeticId = (item: unknown) =>
+  const getCosmeticId = (item: any) =>
     item.cosmetic?._id || item.cosmeticId || "";
 
   const shipping = useMemo(
@@ -141,7 +141,7 @@ const ShoppingCart = () => {
     }
 
     // Lưu vào sessionStorage để sử dụng ở trang checkout
-    sessionStorage.setItem("checkoutItems", JSON.stringify(selectedCartItems));
+    // sessionStorage.setItem("checkoutItems", JSON.stringify(selectedCartItems));
     router.push("/checkout");
   };
 
