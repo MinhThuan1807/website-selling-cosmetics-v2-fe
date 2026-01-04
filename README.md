@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 Beautify - Website Bán Mỹ Phẩm
 
-## Getting Started
+## 📋 Mục Lục
+- [Giới thiệu](#giới-thiệu)
+- [Tech Stack](#tech-stack)
+- [Tính năng](#tính-năng)
+- [Cài đặt](#cài-đặt)
+- [Cấu trúc dự án](#cấu-trúc-dự-án)
+- [Screenshots](#screenshots)
 
-First, run the development server:
+## 🛠 Tech Stack
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **State Management**: Redux Toolkit + TanStack Query
+- **UI**: Tailwind CSS + shadcn/ui
+- **Real-time**: Socket.io
+- **Authentication**: JWT + HTTP-only Cookies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+## ✨ Tính năng
+### Customer
+- [x] Xem danh sách sản phẩm với filter/sort
+- [x] Giỏ hàng & Checkout
+- [x] Thanh toán QR Code (VietQR)
+- [x] Chat real-time với admin
+
+### Admin
+- [x] Dashboard với biểu đồ doanh thu
+- [x] CRUD sản phẩm
+- [x] Quản lý đơn hàng
+- [x] Quản lý người dùng
+
+## 📸 Screenshots
+[Thêm ảnh demo]
+
+## 🚀 Cài đặt
+\```bash
+pnpm install
+cp .env.example .env.local
 pnpm dev
-# or
-bun dev
-```
+\```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📝 Checklist Trước Khi Nộp CV
+- [x]Task	                            Trạng thái
+- [x]Tách component lớn thành nhỏ	    ⬜
+- [x]Thêm constants cho SelectItems	  ⬜
+- [x]Viết ít nhất 5 unit tests	      ⬜
+- [x]Cập nhật README với screenshots	⬜
+- [x]Xóa console.log trong code	      ⬜
+- [x]Thêm Error Boundary	            ⬜
+- [x]Tạo file .env.example	          ⬜
