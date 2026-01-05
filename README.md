@@ -1,50 +1,278 @@
-# 🌸 Beautify - Website Bán Mỹ Phẩm
-
 ## 📋 Mục Lục
-- [Giới thiệu](#giới-thiệu)
-- [Tech Stack](#tech-stack)
-- [Tính năng](#tính-năng)
-- [Cài đặt](#cài-đặt)
-- [Cấu trúc dự án](#cấu-trúc-dự-án)
-- [Screenshots](#screenshots)
+
+- [Giới thiệu](#-giới-thiệu)
+- [Tech Stack](#-tech-stack)
+- [Tính năng](#-tính-năng)
+- [Cài đặt](#-cài-đặt)
+- [Cấu trúc dự án](#-cấu-trúc-dự-án)
+- [Screenshots](#-screenshots)
+- [Checklist](#-checklist-cải-thiện)
+
+---
+
+## 🎯 Giới Thiệu
+
+**Beautify** là website thương mại điện tử bán mỹ phẩm với đầy đủ tính năng cho cả khách hàng và quản trị viên. Dự án được xây dựng với các công nghệ hiện đại nhất trong hệ sinh thái React/Next.js.
+
+---
 
 ## 🛠 Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **State Management**: Redux Toolkit + TanStack Query
-- **UI**: Tailwind CSS + shadcn/ui
-- **Real-time**: Socket.io
-- **Authentication**: JWT + HTTP-only Cookies
 
-## ✨ Tính năng
-### Customer
+| Category             | Technologies                   |
+| -------------------- | ------------------------------ |
+| **Framework**        | Next.js 15 (App Router)        |
+| **Language**         | TypeScript                     |
+| **State Management** | Redux Toolkit + TanStack Query |
+| **Styling**          | Tailwind CSS + shadcn/ui       |
+| **Animation**        | Framer Motion                  |
+| **Real-time**        | Socket.io                      |
+| **Authentication**   | JWT + HTTP-only Cookies        |
+| **Charts**           | Recharts                       |
+| **Form**             | React Hook Form                |
+| **API**              | Axios                          |
+
+---
+
+## ✨ Tính Năng
+
+### 🛒 Customer Side
+
 - [x] Xem danh sách sản phẩm với filter/sort
-- [x] Giỏ hàng & Checkout
+- [x] Chi tiết sản phẩm với accordion
+- [x] Giỏ hàng (thêm, sửa, xóa)
+- [x] Checkout với form validation
 - [x] Thanh toán QR Code (VietQR)
 - [x] Chat real-time với admin
+- [x] Quản lý profile & lịch sử đơn hàng
+- [x] Email verification
 
-### Admin
+### 👨‍💼 Admin Side
+
 - [x] Dashboard với biểu đồ doanh thu
-- [x] CRUD sản phẩm
-- [x] Quản lý đơn hàng
+- [x] CRUD sản phẩm (với upload ảnh)
+- [x] Quản lý đơn hàng (cập nhật trạng thái)
 - [x] Quản lý người dùng
+- [x] Chat support với khách hàng
+- [x] Admin authentication riêng
+
+---
+
+## 🚀 Cài Đặt
+
+### Prerequisites
+
+- Node.js >= 18
+- pnpm (recommended) hoặc npm
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/your-username/beautify-frontend.git
+cd beautify-frontend
+
+# Install dependencies
+pnpm install
+
+# Copy environment variables
+cp .env.example .env.local
+
+# Run development server
+pnpm dev
+```
+
+### Environment Variables
+
+```env
+# .env.example
+NEXT_PUBLIC_API_URL=http://localhost:8080/v1
+NEXT_PUBLIC_SOCKET_URL=http://localhost:8080
+NEXT_PUBLIC_VIETQR_CLIENT_ID=your_client_id
+NEXT_PUBLIC_VIETQR_API_KEY=your_api_key
+```
+
+---
+
+## 📁 Cấu Trúc Dự Án
+
+```
+frontend/
+├── app/
+│   ├── (admin)/           # Admin protected routes
+│   │   ├── dashboard/
+│   │   ├── cosmetic/
+│   │   ├── order/
+│   │   ├── account/
+│   │   └── chat/
+│   ├── (shop)/            # Customer routes
+│   │   ├── product/
+│   │   ├── cart/
+│   │   ├── checkout/
+│   │   └── profile/
+│   ├── admin/(auth)/      # Admin auth routes
+│   └── users/             # User auth routes
+├── components/
+│   ├── ui/                # shadcn components
+│   ├── layout/            # Header, Footer, etc.
+│   ├── dashboard/         # Admin dashboard components
+│   └── product/           # Product related components
+├── lib/
+│   ├── redux/             # Redux slices
+│   ├── api/               # API functions
+│   └── socket/            # Socket context
+├── hooks/                 # Custom hooks
+├── types/                 # TypeScript types
+└── utils/                 # Utility functions
+```
+
+---
 
 ## 📸 Screenshots
-[Thêm ảnh demo]
 
-## 🚀 Cài đặt
-\```bash
-pnpm install
-cp .env.example .env.local
-pnpm dev
-\```
+### Customer Side
 
-📝 Checklist Trước Khi Nộp CV
-- [x]Task	                            Trạng thái
-- [x]Tách component lớn thành nhỏ	    ⬜
-- [x]Thêm constants cho SelectItems	  ⬜
-- [x]Viết ít nhất 5 unit tests	      ⬜
-- [x]Cập nhật README với screenshots	⬜
-- [x]Xóa console.log trong code	      ⬜
-- [x]Thêm Error Boundary	            ⬜
-- [x]Tạo file .env.example	          ⬜
+| Trang chủ                     | Sản phẩm                            | Giỏ hàng                        |
+| ----------------------------- | ----------------------------------- | ------------------------------- |
+| ![Home]![alt text](image.png) | ![Products]![alt text](image-1.png) | ![Cart]![alt text](image-2.png) |
+
+### Admin Side
+
+| Dashboard                               | Quản lý SP                                  | Đơn hàng                          |
+| --------------------------------------- | ------------------------------------------- | --------------------------------- |
+| ![Dashboard](screenshots/dashboard.png) | ![Products](screenshots/admin-products.png) | ![Orders](screenshots/orders.png) |
+
+---
+
+## ✅ Checklist Cải Thiện
+
+### 🔴 Ưu Tiên Cao (Cần làm trước khi apply)
+
+- [ ] **Refactor Component Lớn**
+
+  - [ ] Tách `cosmetic/page.tsx` thành components nhỏ
+  - [ ] Tách `order/page.tsx` thành components nhỏ
+  - [ ] Tách `account/page.tsx` thành components nhỏ
+
+- [ ] **Tạo Constants**
+
+  - [ ] Tạo `lib/constants/categories.ts` cho SelectItems
+  - [ ] Tạo `lib/constants/orderStatus.ts`
+  - [ ] Tạo `lib/constants/userRoles.ts`
+
+- [ ] **Clean Code**
+
+  - [ ] Xóa tất cả `console.log`
+  - [ ] Xóa code commented không cần thiết
+  - [ ] Thay thế `any` type bằng proper types
+
+- [ ] **Error Handling**
+
+  - [ ] Thêm Error Boundary component
+  - [ ] Thêm 404 page
+  - [ ] Thêm error.tsx cho từng route
+
+- [ ] **Environment**
+  - [ ] Tạo file `.env.example`
+  - [ ] Document tất cả env variables
+
+### 🟠 State Management (Redux + TanStack Query)
+
+- [ ] **Tối ưu Redux**
+
+  - [ ] Xóa duplicate state (API data không lưu Redux)
+  - [ ] Tạo selectors với `createSelector`
+  - [ ] Chỉ dùng Redux cho: cart, UI state, auth session
+
+- [ ] **Tối ưu TanStack Query**
+
+  - [ ] Tạo `lib/api/queryKeys.ts` - Query Key Factory
+  - [ ] Tạo `lib/api/queryClient.ts` - Optimized config
+  - [ ] Tạo custom hooks trong `hooks/queries/`
+    - [ ] `useCosmetics.ts`
+    - [ ] `useOrders.ts`
+    - [ ] `useAuth.ts`
+    - [ ] `useUsers.ts`
+
+- [ ] **Tối ưu Axios**
+  - [ ] Refactor `lib/api/axios.ts` - Better interceptors
+  - [ ] Tạo API services trong `lib/api/services/`
+    - [ ] `cosmetic.api.ts`
+    - [ ] `order.api.ts`
+    - [ ] `auth.api.ts`
+    - [ ] `user.api.ts`
+
+### 🟡 Ưu Tiên Trung Bình
+
+- [ ] **Testing**
+
+  - [ ] Setup Jest + React Testing Library
+  - [ ] Viết unit tests cho utility functions
+  - [ ] Viết tests cho custom hooks
+  - [ ] Viết component tests (ít nhất 5 tests)
+
+- [ ] **Performance**
+
+  - [ ] Thêm `React.memo` cho list items
+  - [ ] Thêm `useMemo` cho filtered/sorted data
+  - [ ] Thêm `useCallback` cho event handlers
+  - [ ] Optimize images với `next/image`
+
+- [ ] **Documentation**
+  - [ ] Thêm JSDoc cho functions quan trọng
+  - [ ] Cập nhật README với screenshots thực
+  - [ ] Tạo CONTRIBUTING.md
+
+### 🟢 Ưu Tiên Thấp (Nice to have)
+
+- [ ] **Accessibility**
+
+  - [ ] Thêm `aria-labels` cho buttons/icons
+  - [ ] Kiểm tra keyboard navigation
+  - [ ] Kiểm tra color contrast
+
+- [ ] **Advanced Features**
+
+  - [ ] Setup Storybook cho UI components
+  - [ ] Đạt Lighthouse score > 90
+  - [ ] Thêm PWA support
+  - [ ] Thêm i18n (đa ngôn ngữ)
+
+- [ ] **CI/CD**
+  - [ ] Setup GitHub Actions
+  - [ ] Auto deploy to Vercel
+  - [ ] Add lint/test checks
+
+---
+
+## 📊 Progress Tracking
+
+| Milestone                   | Status         | Target Date |
+| --------------------------- | -------------- | ----------- |
+| Refactor Components         | ⬜ Not Started | Week 1      |
+| Add Constants               | ⬜ Not Started | Week 1      |
+| Clean Code                  | ⬜ Not Started | Week 1      |
+| Error Handling              | ⬜ Not Started | Week 1      |
+| **Optimize Redux**          | ⬜ Not Started | Week 1      |
+| **Optimize TanStack Query** | ⬜ Not Started | Week 1-2    |
+| **Optimize Axios**          | ⬜ Not Started | Week 1      |
+| Basic Tests                 | ⬜ Not Started | Week 2      |
+| Screenshots                 | ⬜ Not Started | Week 2      |
+| Performance                 | ⬜ Not Started | Week 2      |
+
+---
+
+## 🔗 Links
+
+- **Backend Repository**: [beautify-backend](https://github.com/QUANG221222/Website-Selling-Cosmetics-v2)
+- **Live Demo**: [beautify.vercel.app](https://beautyst.click/)
+
+---
+
+## 👤 Author
+
+**Your Name**
+
+- GitHub: [MinhThuan1807](https://github.com/MinhThuan1807)
+- Email: your.email@example.com
+
+---
