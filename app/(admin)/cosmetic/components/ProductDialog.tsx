@@ -22,8 +22,8 @@ import {
 } from "@/components/ui/select";
 import { Upload } from "lucide-react";
 import { Cosmetic } from "@/lib/types/index";
-import { COSMETIC_CATEGORIES } from "../constants/categories";
-import { DialogState, ImageState } from "../hooks/useProductManagement";
+import { COSMETIC_CATEGORIES } from "@/lib/constants/categories";
+import { DialogState, ImageState } from "@/hooks/useProductManagement";
 
 interface ProductDialogProps {
   dialogState: DialogState;

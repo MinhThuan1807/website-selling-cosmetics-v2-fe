@@ -25,7 +25,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { Cosmetic } from "@/lib/types/index";
 import { ProductTableRow } from "./ProductTableRow";
-import { PAGE_SIZE_OPTIONS } from "../constants/categories";
+import { PAGE_SIZE_OPTIONS } from "@/lib/constants/categories";
 
 interface ProductTableProps {
   products: Cosmetic[];

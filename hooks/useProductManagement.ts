@@ -15,7 +15,7 @@ import {
 
 export interface ProductFiltersState {
   searchTerm: string;
-  category: string;
+  categoryFilter: string;
   stockFilter: string;
 }
 
@@ -54,9 +54,9 @@ export const useProductManagement = () => {
   const pagination = useSelector(selectCosmeticPagination);
 
   // Filters State
-  const [filters, setFilters] = useState<ProductFiltersDState>({
+  const [filters, setFilters] = useState<ProductFiltersState>({
     searchTerm: "",
-    categogyFilter: "all",
+    categoryFilter: "all",
     stockFilter: "all",
   })
 
@@ -65,14 +65,14 @@ export const useProductManagement = () => {
   const [pageSize, setPageSize] = useState(10);
 
   // Dialog State
-  const [dialog, setDialog] = useState<DialogState>({
+  const [dialogState, setDialogState] = useState<DialogState>({
     isEditOpen: false,
     isAddOpen: false,
     selectedProduct: null,
   })
 
   // Image State
-  const [image, setImage] = useState<ImageState>({
+  const [imageState, setImageState] = useState<ImageState>({
     file: null,
     preview: "",
   });
@@ -138,7 +138,7 @@ export const useProductManagement = () => {
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImage({
+      setImageState({
         file,
         preview: reader.result as string,
       });

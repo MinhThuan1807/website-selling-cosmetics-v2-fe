@@ -9,7 +9,7 @@ import {
 import { ProductFilters } from "./components/ProductFilters";
 import { ProductTable } from "./components/ProductTable";
 import { ProductDialog } from "./components/ProductDialog";
-import { useProductManagement } from "./hooks/useProductManagement";
+import { useProductManagement } from "@/hooks/useProductManagement";
 
 const ProductsManagement = () => {
   const {

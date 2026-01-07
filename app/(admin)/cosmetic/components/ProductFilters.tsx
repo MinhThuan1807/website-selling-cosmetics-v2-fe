@@ -9,8 +9,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search, Plus } from "lucide-react";
-import { COSMETIC_CATEGORIES, STOCK_FILTERS } from "../constants/categories";
-import { ProductFiltersState } from "../hooks/useProductManagement";
+import { COSMETIC_CATEGORIES, STOCK_FILTERS } from "@/lib/constants/categories";
+import { ProductFiltersState } from "@/hooks/useProductManagement";
 
 interface ProductFiltersProps {
   filters: ProductFiltersState;
