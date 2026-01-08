@@ -21,6 +21,20 @@ export function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
 
+export const formatDateShort = (date: Date | string): string => {
+  return new Date(date).toLocaleDateString("vi-VN");
+};
+
+export const truncateOrderId = (orderId: string): string => {
+  if (orderId.length <= 10) return orderId;
+  return `#${orderId.substring(0, 8)}...`;
+};
+
+export const truncateText = (text: string, maxLength: number): string => {
+  if (text.length <= maxLength) return text;
+  return `${text.substring(0, maxLength)}...`;
+};
+
 // Debounce function for search
 export function debounce<T extends (...args: any[]) => void>(
   func: T,
