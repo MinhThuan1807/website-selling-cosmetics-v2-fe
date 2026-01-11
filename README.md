@@ -133,7 +133,7 @@ frontend/
 
 | Trang chủ                     | Sản phẩm                            | Giỏ hàng                        |
 | ----------------------------- | ----------------------------------- | ------------------------------- |
-| ![Home]![alt text](image.png) | ![Products]![alt text](image-1.png) | ![Cart]![alt text](image-2.png) |
+| ![Home]![alt text](home.png) | ![Products]![alt text](products.png) | ![Cart]![alt text](cart.png) |
 
 ### Admin Side
 
@@ -149,14 +149,14 @@ frontend/
 
 - [ ] **Refactor Component Lớn**
 
-  - [ ] Tách `cosmetic/page.tsx` thành components nhỏ
-  - [ ] Tách `order/page.tsx` thành components nhỏ
+  - [X] Tách `cosmetic/page.tsx` thành components nhỏ
+  - [X] Tách `order/page.tsx` thành components nhỏ
   - [ ] Tách `account/page.tsx` thành components nhỏ
 
 - [ ] **Tạo Constants**
 
-  - [ ] Tạo `lib/constants/categories.ts` cho SelectItems
-  - [ ] Tạo `lib/constants/orderStatus.ts`
+  - [X] Tạo `lib/constants/categories.ts` cho SelectItems
+  - [X] Tạo `lib/constants/orderStatus.ts`
   - [ ] Tạo `lib/constants/userRoles.ts`
 
 - [ ] **Clean Code**
