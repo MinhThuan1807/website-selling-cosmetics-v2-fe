@@ -55,7 +55,6 @@ export const loginUserApi = createAsyncThunk(
       const userData = response.data.data || response.data;
 
       if (!userData || !userData._id) {
-        console.error("❌ Dữ liệu không hợp lệ:", userData);
         throw new Error(
           "Không nhận được dữ liệu người dùng hợp lệ sau khi đăng nhập"
         );
@@ -63,7 +62,6 @@ export const loginUserApi = createAsyncThunk(
 
       return userData;
     } catch (error: any) {
-      console.error("❌ Đăng nhập thất bại:", error);
       const message =
         error?.response?.data?.message || error.message || "Đăng nhập thất bại";
       toast.error(message);
@@ -104,7 +102,6 @@ export const createNewUser = createAsyncThunk(
       toast.success("User created successfully!");
       return userData;
     } catch (error: any) {
-      console.error("❌ Create user error:", error);
       const message =
         error?.response?.data?.message || error.message || "Create user failed";
       toast.error(message);
@@ -132,7 +129,6 @@ export const fetchCurrentUser = createAsyncThunk(
 
       return userData;
     } catch (error: any) {
-      console.log("❌ Not logged in or session expired");
       return rejectWithValue(null);
     }
   }
@@ -249,7 +245,6 @@ export const userSlice = createSlice({
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.loading = false;
         state.selectedUser = action.payload;
-        console.log("✅ Current user fetched:", action.payload);
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
         state.loading = false;

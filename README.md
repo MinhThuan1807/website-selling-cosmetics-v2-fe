@@ -147,23 +147,21 @@ frontend/
 
 ### 🔴 Ưu Tiên Cao (Cần làm trước khi apply)
 
-- [ ] **Refactor Component Lớn**
+- [X] **Refactor Component Lớn**
 
   - [X] Tách `cosmetic/page.tsx` thành components nhỏ
   - [X] Tách `order/page.tsx` thành components nhỏ
-  - [ ] Tách `account/page.tsx` thành components nhỏ
+  - [X] Tách `account/page.tsx` thành components nhỏ
 
-- [ ] **Tạo Constants**
+- [X] **Tạo Constants**
 
   - [X] Tạo `lib/constants/categories.ts` cho SelectItems
   - [X] Tạo `lib/constants/orderStatus.ts`
-  - [ ] Tạo `lib/constants/userRoles.ts`
 
 - [ ] **Clean Code**
 
-  - [ ] Xóa tất cả `console.log`
-  - [ ] Xóa code commented không cần thiết
-  - [ ] Thay thế `any` type bằng proper types
+  - [X] Xóa tất cả `console.log`
+  - [X] Xóa code commented không cần thiết
 
 - [ ] **Error Handling**
 

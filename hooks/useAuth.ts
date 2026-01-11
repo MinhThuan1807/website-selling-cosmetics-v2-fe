@@ -11,9 +11,7 @@ export const useAuth = () => {
   const userLoading = useSelector(selectUserLoading)
    const router = useRouter()
 
-    const requireUserAuth = (callback: () => void, message?: string) => {
-        console.log('Current User:', currentUser); // Debugging line
-       
+    const requireUserAuth = (callback: () => void, message?: string) => {       
         if (userLoading) {
             return false
         }

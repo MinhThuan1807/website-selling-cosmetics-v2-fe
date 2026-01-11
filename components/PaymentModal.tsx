@@ -52,7 +52,6 @@ export default function PaymentModal({
       }
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || "Lỗi kết nối");
-      console.error("Error:", err);
     } finally {
       setLoading(false);
     }

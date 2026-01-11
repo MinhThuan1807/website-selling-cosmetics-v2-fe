@@ -1,3 +1,7 @@
+/**
+ * Thông tin người dùng trong hệ thống
+ * Bao gồm cả khách hàng và quản trị viên
+ */
 export interface User {
   _id: string;
   email: string;
@@ -12,6 +16,10 @@ export interface User {
   createdAt: Date;
 }
 
+/**
+ * Thông tin sản phẩm mỹ phẩm
+ * Bao gồm thông tin giá gốc và giá khuyến mãi
+ */
 export interface Cosmetic {
   _id: string;
   brand: string;
@@ -29,6 +37,10 @@ export interface Cosmetic {
   updatedAt: Date;
 }
 
+/**
+ * Địa chỉ giao hàng của người dùng
+ * Mỗi user có thể có nhiều địa chỉ, một địa chỉ mặc định
+ */
 export interface Address {
   _id: string;
   userId: string;
@@ -39,12 +51,19 @@ export interface Address {
   createdAt: Date;
 }
 
+/**
+ * Mục trong giỏ hàng
+ * Hỗ trợ cả trường hợp chỉ có ID và trường hợp đã populate đầy đủ
+ */
 export interface CartItem {
-  cosmeticId?: string; // Backend returns this
-  cosmetic?: Cosmetic; // Populated cosmetic object (optional)
+  /** ID sản phẩm - Backend trả về trường này */
+  cosmeticId?: string;
+  /** Đối tượng sản phẩm đầy đủ - Được populate từ cosmeticId */
+  cosmetic?: Cosmetic;
   quantity: number;
   price?: number;
   subtotal: number;
+  /** Trạng thái được chọn trong giỏ hàng */
   isSelected?: boolean;
 }
 

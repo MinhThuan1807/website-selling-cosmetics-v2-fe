@@ -8,7 +8,6 @@ export const generateQRPayment = async (amount: number, description = '') => {
     });
     return response.data;
   } catch (error) {
-    console.error('Error generating QR:', error);
     throw error;
   }
 };
