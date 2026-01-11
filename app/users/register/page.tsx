@@ -32,7 +32,6 @@ const Register = () => {
       } else {
         toast.error("Đăng ký thất bại!");
       }
-      console.error(error);
     }
   };
   return (

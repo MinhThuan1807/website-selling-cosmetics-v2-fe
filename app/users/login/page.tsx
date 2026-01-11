@@ -32,7 +32,6 @@ const SignIn = () => {
       } else {
         toast.error("Đăng nhập thất bại!");
       }
-      console.error(error);
     }
   };
 

@@ -1,3 +1,8 @@
+/**
+ * Danh sách danh mục sản phẩm mỹ phẩm
+ * Sắp xếp theo thứ tự alphabet tiếng Việt
+ * Sử dụng cho: Filter sản phẩm, Form tạo/sửa sản phẩm
+ */
 export const COSMETIC_CATEGORIES = [
   { value: "bodycare", label: "Chăm sóc cơ thể" },
   { value: "bodylotion", label: "Kem dưỡng thể" },
@@ -61,6 +66,10 @@ export const COSMETIC_CATEGORIES = [
   { value: "mascara", label: "Mascara" },
 ] as const;
 
+/**
+ * Bộ lọc tình trạng kho hàng
+ * Sử dụng cho trang quản lý sản phẩm (Admin)
+ */
 export const STOCK_FILTERS = [
   { value: "all", label: "Tất cả" },
   { value: "in-stock", label: "Còn hàng" },
@@ -68,4 +77,8 @@ export const STOCK_FILTERS = [
   { value: "out-of-stock", label: "Hết hàng" },
 ] as const;
 
+/**
+ * Tùy chọn số lượng item trên mỗi trang
+ * Sử dụng cho pagination
+ */
 export const PAGE_SIZE_OPTIONS = [10, 20, 50] as const;

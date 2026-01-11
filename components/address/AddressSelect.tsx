@@ -125,7 +125,7 @@ export function AddressSelect({ onAddressChange }: AddressSelectProps) {
         // Refresh addresses to get updated list
         await dispatch(fetchAddresses()).unwrap();
       } catch (error) {
-        console.error("Delete address error:", error);
+        toast.error("Xóa địa chỉ thất bại!");
       }
     }
   };
@@ -142,7 +142,7 @@ export function AddressSelect({ onAddressChange }: AddressSelectProps) {
       // Refresh addresses to get updated default status
       await dispatch(fetchAddresses()).unwrap();
     } catch (error) {
-      console.error("Set default address error:", error);
+      toast.error("Cập nhật địa chỉ thất bại!");
     }
   };
 
@@ -162,7 +162,7 @@ export function AddressSelect({ onAddressChange }: AddressSelectProps) {
           onAddressChange?.(result[editingIndex], editingIndex);
         }
       } catch (error) {
-        console.error("Update address error:", error);
+        toast.error("Cập nhật địa chỉ thất bại!");
       }
     }
   };

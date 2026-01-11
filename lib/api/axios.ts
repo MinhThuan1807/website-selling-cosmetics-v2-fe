@@ -84,76 +84,42 @@ const handleLogout = async () => {
       });
     }
   } catch (error) {
-    console.error("Logout error:", error);
+    toast.error("Logout error!");
   }
 };
 
-// Interceptor response
+/**
+ * Xử lý lỗi từ response API
+ * Hiển thị toast thông báo phù hợp với từng loại lỗi
+ */
 axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error: AxiosError) => {
-    const status = error.response?.status;
-    const config = error.config as any;
+    const { response, config } = error;
+    const status = response?.status;
 
-    // Handle 401 Unauthorized
-    if (status === 401) {
-      // Early return for skip cases
-      if (config?.headers?.["X-Skip-Auth-Redirect"]) {
-        return Promise.reject(error);
-      }
-
-      const currentPath =
-        typeof window !== "undefined" ? window.location.pathname : "";
-
-      if (!isPublicPath(currentPath)) {
-        // Prevent multiple simultaneous 401 handling
-        if (!isLoggingOut) {
-          isLoggingOut = true;
-
-          toast.error("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
-
-          // Get redirect URL before logout
-          const redirectUrl = getRedirectUrl();
-
-          try {
-            await handleLogout();
-          } catch (logoutError) {
-            console.error("Logout failed:", logoutError);
-          }
-
-          // Always redirect, even if logout fails
-          setTimeout(() => {
-            if (typeof window !== "undefined") {
-              isLoggingOut = false;
-              window.location.replace(redirectUrl);
-            }
-          }, 100);
-        }
-      }
-
-      return Promise.reject(error);
-    }
-
-    // Handle 429 Too Many Requests
+    // Xử lý lỗi Rate Limit (429)
     if (status === 429) {
-      const retryAfter = error.response?.headers?.["retry-after"];
+      const retryAfter = response?.headers?.["retry-after"];
       const message = retryAfter
         ? `Quá nhiều yêu cầu. Vui lòng thử lại sau ${retryAfter}s`
         : "Quá nhiều yêu cầu. Vui lòng thử lại sau";
 
+      // Kiểm tra header để quyết định có hiển thị toast không
       if (!config?.headers?.["X-No-Toast"]) {
         toast.error(message);
       }
       return Promise.reject(error);
     }
 
-    // Handle other errors (400, 403, 404, 500, etc.)
+    // Xử lý các lỗi khác (400, 403, 404, 500, v.v.)
     if (status && !config?.headers?.["X-No-Toast"]) {
-      const data = error.response?.data as any;
+      const data = error.response?.data as Record<string, unknown>;
       const errorMessage =
-        data?.message || data?.error || error.message || "Đã xảy ra lỗi";
+        (data?.message as string) ||
+        (data?.error as string) ||
+        error.message ||
+        "Đã xảy ra lỗi";
       toast.error(errorMessage);
     }
 

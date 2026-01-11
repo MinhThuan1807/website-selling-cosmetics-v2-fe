@@ -29,7 +29,6 @@ export default function PieRevenueChart() {
     }))
     .filter(item => item.revenue > 0);
 
-  console.log('Safe data:', safeData);
 
   if (safeData.length === 0) {
     return (

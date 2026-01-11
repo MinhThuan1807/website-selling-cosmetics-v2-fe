@@ -97,7 +97,6 @@ const Checkout = () => {
           router.push("/cart");
         }, 1500);
       } catch (error) {
-        console.error("Failed to load checkout data:", error);
         toast.error("Có lỗi xảy ra!");
         setShouldRedirect(true);
         setTimeout(() => {
@@ -132,8 +131,7 @@ const Checkout = () => {
 
   const handleOrder = async (data: CreateOrderData) => {
     try {
-      console.log("Checkout Data:", data);
-
+      // Chuẩn bị dữ liệu đơn hàng từ form và giỏ hàng
       const orderData = {
         receiverName: data.receiverName,
         receiverPhone: data.receiverPhone,
@@ -150,21 +148,20 @@ const Checkout = () => {
             quantity: item.quantity,
             price: item.cosmetic!.discountPrice,
           })),
-        // totalAmount: total,
       };
 
-      // Dispatch create order action
+      // Gửi request tạo đơn hàng
       await dispatch(createOrder(orderData)).unwrap();
 
-      // ✅ Xóa sessionStorage sau khi đặt hàng thành công
+      // Dọn dẹp dữ liệu checkout trong session storage sau khi đặt hàng thành công
       sessionStorage.removeItem("checkoutItems");
       sessionStorage.removeItem("checkoutTotalPrice");
 
       toast.success("Đặt hàng thành công!");
-      // Redirect to order success page
+
+      // Chuyển hướng về trang profile để xem đơn hàng
       router.push("/profile");
     } catch (error: any) {
-      console.error("Order creation error:", error);
       toast.error(error?.message || "Đặt hàng thất bại!");
     }
   };

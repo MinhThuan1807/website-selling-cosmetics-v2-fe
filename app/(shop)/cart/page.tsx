@@ -146,7 +146,6 @@ const ShoppingCart = () => {
       sessionStorage.setItem("checkoutTotalPrice", selectedTotalPrice.toString());
       router.push("/checkout");
     } catch (error) {
-      console.error("Failed to save checkout data:", error);
       toast.error("Có lỗi xảy ra, vui lòng thử lại!");
     }
   };
