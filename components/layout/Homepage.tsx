@@ -36,7 +36,7 @@ const HomePage = () => {
   // Handle view product detail
   const handleViewProduct = (cosmetic: Cosmetic) => {
     // Navigate to product detail page
-    router.push(`/product/${cosmetic._id}`);
+    router.push(`/product/${cosmetic.slug}`);
   };
 
   // Handle add to cart
