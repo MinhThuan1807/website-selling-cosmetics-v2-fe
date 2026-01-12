@@ -22,6 +22,7 @@ export interface User {
  */
 export interface Cosmetic {
   _id: string;
+  slug: string;
   brand: string;
   nameCosmetic: string;
   description?: string;

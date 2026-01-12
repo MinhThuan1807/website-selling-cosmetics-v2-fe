@@ -111,6 +111,18 @@ export const getPagination = createAsyncThunk(
     }
 )
 
+export const fetchCosmeticBySlug = createAsyncThunk(
+  'cosmetic/fetchBySlug',
+  async (slug: string, { rejectWithValue }) => {
+    try {
+      const response = await cosmeticApi.getBySlug(slug);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error?.response?.data?.message || 'Failed to fetch cosmetic');
+    }
+  }
+);
+
 // Slice
 export const cosmeticSlice = createSlice({
   name: 'cosmetic',
@@ -243,6 +255,19 @@ export const cosmeticSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+       .addCase(fetchCosmeticBySlug.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(fetchCosmeticBySlug.fulfilled, (state, action) => {
+      state.loading = false;
+      state.selectedCosmetic = action.payload;
+    })
+    .addCase(fetchCosmeticBySlug.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload as string;
+    });
+
   }
 })
 
