@@ -147,11 +147,16 @@ frontend/
 
 ### 🔴 Ưu Tiên Cao (Cần làm trước khi apply)
 
-- [X] **Refactor Component Lớn**
+- [ ] **Refactor Component Lớn**
 
   - [X] Tách `cosmetic/page.tsx` thành components nhỏ
   - [X] Tách `order/page.tsx` thành components nhỏ
   - [X] Tách `account/page.tsx` thành components nhỏ
+  - [ ] Tách `cart/page.tsx` thành components nhỏ
+  - [ ] Tách `checkout/page.tsx` thành components nhỏ
+  - [X] Tách `product/page.tsx` thành components nhỏ
+  - [X] Tách `product/[slug]/page.tsx` thành components nhỏ
+  - [ ] Tách `profile/page.tsx` thành components nhỏ
 
 - [X] **Tạo Constants**
 

@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'recharts', '@radix-ui/react-dialog'],
+  },
 
   // Bỏ qua lỗi ESLint khi build
   // TODO: Xử lý các lỗi ESLint và bật lại check
