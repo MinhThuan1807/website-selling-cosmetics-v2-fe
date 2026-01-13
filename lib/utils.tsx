@@ -1,6 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-
+import { Order } from "./types";
+import { CheckCircle, Package, Truck, XCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 /**
  * Kết hợp các class CSS với Tailwind merge
  * Tự động xử lý xung đột giữa các class Tailwind
@@ -110,3 +112,55 @@ export function isValidPhoneNumber(phone: string): boolean {
     /^(\+84|84|0)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-9]|9[0-9])[0-9]{7}$/;
   return phoneRegex.test(phone.replace(/\s+/g, ""));
 }
+export const getStatusBadge = (status: Order["status"]) => {
+  const statusConfig = {
+    pending: {
+      label: "Chờ xử lý",
+      variant: "secondary" as const,
+      icon: Package,
+    },
+    processing: {
+      label: "Đang xử lý",
+      variant: "default" as const,
+      icon: Truck,
+    },
+    completed: {
+      label: "Hoàn thành",
+      variant: "outline" as const,
+      icon: CheckCircle,
+    },
+    cancelled: {
+      label: "Đã hủy",
+      variant: "destructive" as const,
+      icon: XCircle,
+    },
+  };
+
+  const config = statusConfig[status];
+  const Icon = config.icon;
+
+  return (
+    <Badge variant={config.variant} className="flex items-center gap-1">
+      <Icon className="h-3 w-3" />
+      {config.label}
+    </Badge>
+  );
+};
+
+export const getPaymentBadge = (status: string) => {
+  const paymentConfig = {
+    paid: { label: "Đã thanh toán", variant: "outline" as const },
+    unpaid: { label: "Chưa thanh toán", variant: "secondary" as const },
+    failed: { label: "Thanh toán thất bại", variant: "destructive" as const },
+  };
+
+  const config = paymentConfig[status as keyof typeof paymentConfig];
+
+  return <Badge variant={config.variant}>{config.label}</Badge>;
+};
+export const formatPrice = (price: number) => {
+  return new Intl.NumberFormat("vi-VN").format(price) + " VNĐ";
+};
+
+export const getCosmeticId = (item: any) =>
+  item.cosmetic?._id || item.cosmeticId || "";

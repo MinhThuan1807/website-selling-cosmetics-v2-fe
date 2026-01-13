@@ -68,6 +68,7 @@ export const mockUsers: User[] = [
 export const mockCosmetics: Cosmetic[] = [
   {
     _id: "c1",
+    slug: "revitalift-anti-aging-serum",
     brand: "L'Oréal",
     nameCosmetic: "Revitalift Anti-Aging Serum",
     description: "Serum chống lão hóa với Vitamin C và Retinol",
@@ -84,6 +85,7 @@ export const mockCosmetics: Cosmetic[] = [
   },
   {
     _id: "c2",
+    slug: "revitalift-anti-aging-serum",
     brand: "Maybelline",
     nameCosmetic: "SuperStay Matte Ink Lipstick",
     description: "Son lì lâu trôi với công thức không khô môi",
@@ -100,6 +102,7 @@ export const mockCosmetics: Cosmetic[] = [
   },
   {
     _id: "c3",
+    slug: "revitalift-anti-aging-serum",
     brand: "Neutrogena",
     nameCosmetic: "Hydrating Foaming Cleanser",
     description: "Sữa rửa mặt dưỡng ẩm cho da khô và nhạy cảm",
@@ -116,6 +119,7 @@ export const mockCosmetics: Cosmetic[] = [
   },
   {
     _id: "c4",
+    slug: "revitalift-anti-aging-serum",
     brand: "MAC",
     nameCosmetic: "Studio Fix Foundation",
     description: "Kem nền che phủ hoàn hảo cho mọi loại da",
@@ -132,6 +136,7 @@ export const mockCosmetics: Cosmetic[] = [
   },
   {
     _id: "c5",
+    slug: "revitalift-anti-aging-serum",
     brand: "The Ordinary",
     nameCosmetic: "Niacinamide 10% + Zinc 1%",
     description: "Tinh chất trị mụn và se khít lỗ chân lông",
