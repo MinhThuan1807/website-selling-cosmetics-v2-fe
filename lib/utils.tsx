@@ -158,3 +158,9 @@ export const getPaymentBadge = (status: string) => {
 
   return <Badge variant={config.variant}>{config.label}</Badge>;
 };
+export const formatPrice = (price: number) => {
+  return new Intl.NumberFormat("vi-VN").format(price) + " VNĐ";
+};
+
+export const getCosmeticId = (item: any) =>
+  item.cosmetic?._id || item.cosmeticId || "";

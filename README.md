@@ -147,16 +147,16 @@ frontend/
 
 ### 🔴 Ưu Tiên Cao (Cần làm trước khi apply)
 
-- [ ] **Refactor Component Lớn**
+- [X] **Refactor Component Lớn**
 
   - [X] Tách `cosmetic/page.tsx` thành components nhỏ
   - [X] Tách `order/page.tsx` thành components nhỏ
   - [X] Tách `account/page.tsx` thành components nhỏ
-  - [ ] Tách `cart/page.tsx` thành components nhỏ
-  - [ ] Tách `checkout/page.tsx` thành components nhỏ
+  - [X] Tách `cart/page.tsx` thành components nhỏ
+  - [X] Tách `checkout/page.tsx` thành components nhỏ
   - [X] Tách `product/page.tsx` thành components nhỏ
   - [X] Tách `product/[slug]/page.tsx` thành components nhỏ
-  - [ ] Tách `profile/page.tsx` thành components nhỏ
+  - [X] Tách `profile/page.tsx` thành components nhỏ
 
 - [X] **Tạo Constants**
 
@@ -174,9 +174,9 @@ frontend/
   - [ ] Thêm 404 page
   - [ ] Thêm error.tsx cho từng route
 
-- [ ] **Environment**
-  - [ ] Tạo file `.env.example`
-  - [ ] Document tất cả env variables
+- [X] **Environment**
+  - [X] Tạo file `.env.example`
+  - [X] Document tất cả env variables
 
 ### 🟠 State Management (Redux + TanStack Query)
 
@@ -247,25 +247,8 @@ frontend/
 
 ---
 
-## 📊 Progress Tracking
-
-| Milestone                   | Status         | Target Date |
-| --------------------------- | -------------- | ----------- |
-| Refactor Components         | ⬜ Not Started | Week 1      |
-| Add Constants               | ⬜ Not Started | Week 1      |
-| Clean Code                  | ⬜ Not Started | Week 1      |
-| Error Handling              | ⬜ Not Started | Week 1      |
-| **Optimize Redux**          | ⬜ Not Started | Week 1      |
-| **Optimize TanStack Query** | ⬜ Not Started | Week 1-2    |
-| **Optimize Axios**          | ⬜ Not Started | Week 1      |
-| Basic Tests                 | ⬜ Not Started | Week 2      |
-| Screenshots                 | ⬜ Not Started | Week 2      |
-| Performance                 | ⬜ Not Started | Week 2      |
-
----
-
 ## 🔗 Links
-
+- **Original repository** [original-repo]()
 - **Backend Repository**: [beautify-backend](https://github.com/QUANG221222/Website-Selling-Cosmetics-v2)
 - **Live Demo**: [beautify.vercel.app](https://beautyst.click/)
 
