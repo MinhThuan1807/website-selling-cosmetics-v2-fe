@@ -61,7 +61,7 @@ const CosmeticDetail = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Product Images */}
         <ProductImage
-          image={cosmetic.image}
+          image={cosmetic.image || "products.png"}
           name={cosmetic.nameCosmetic}
           isOutOfStock={isOutOfStock}
         />
