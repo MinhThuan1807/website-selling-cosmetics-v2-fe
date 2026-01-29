@@ -24,9 +24,8 @@
 | **Language**         | TypeScript                     |
 | **State Management** | Redux Toolkit + TanStack Query |
 | **Styling**          | Tailwind CSS + shadcn/ui       |
-| **Animation**        | Framer Motion                  |
 | **Real-time**        | Socket.io                      |
-| **Authentication**   | JWT + HTTP-only Cookies        |
+| **Authentication**   | Session                        |
 | **Charts**           | Recharts                       |
 | **Form**             | React Hook Form                |
 | **API**              | Axios                          |
@@ -145,7 +144,7 @@ frontend/
 
 ## ✅ Checklist Cải Thiện
 
-### 🔴 Ưu Tiên Cao (Cần làm trước khi apply)
+### 🔴 Ưu Tiên Cao
 
 - [X] **Refactor Component Lớn**
 
@@ -163,7 +162,7 @@ frontend/
   - [X] Tạo `lib/constants/categories.ts` cho SelectItems
   - [X] Tạo `lib/constants/orderStatus.ts`
 
-- [ ] **Clean Code**
+- [X] **Clean Code**
 
   - [X] Xóa tất cả `console.log`
   - [X] Xóa code commented không cần thiết
@@ -213,18 +212,6 @@ frontend/
   - [ ] Viết tests cho custom hooks
   - [ ] Viết component tests (ít nhất 5 tests)
 
-- [ ] **Performance**
-
-  - [ ] Thêm `React.memo` cho list items
-  - [ ] Thêm `useMemo` cho filtered/sorted data
-  - [ ] Thêm `useCallback` cho event handlers
-  - [ ] Optimize images với `next/image`
-
-- [ ] **Documentation**
-  - [ ] Thêm JSDoc cho functions quan trọng
-  - [ ] Cập nhật README với screenshots thực
-  - [ ] Tạo CONTRIBUTING.md
-
 ### 🟢 Ưu Tiên Thấp (Nice to have)
 
 - [ ] **Accessibility**
@@ -240,25 +227,20 @@ frontend/
   - [ ] Thêm PWA support
   - [ ] Thêm i18n (đa ngôn ngữ)
 
-- [ ] **CI/CD**
-  - [ ] Setup GitHub Actions
-  - [ ] Auto deploy to Vercel
-  - [ ] Add lint/test checks
-
 ---
 
 ## 🔗 Links
-- **Original repository** [original-repo]()
+- **Original repository** [original-repo](https://github.com/QUANG221222/Website-Selling-Cosmetics-v2.git)
 - **Backend Repository**: [beautify-backend](https://github.com/QUANG221222/Website-Selling-Cosmetics-v2)
-- **Live Demo**: [beautify.vercel.app](https://beautyst.click/)
+- **Live Demo**: [beautyst.click](https://beautyst.click/)
 
 ---
 
 ## 👤 Author
 
-**Your Name**
+**NGUYEN MINH THUAN**
 
 - GitHub: [MinhThuan1807](https://github.com/MinhThuan1807)
-- Email: your.email@example.com
+- Email: thuannm9997@ut.edu.vn
 
 ---
