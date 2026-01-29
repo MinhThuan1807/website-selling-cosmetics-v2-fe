@@ -29,9 +29,9 @@ const nextConfig: NextConfig = {
 
   // Bỏ qua lỗi TypeScript khi build
   // TODO: Xử lý các lỗi TypeScript và bật lại check
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  // typescript: {
+  //   ignoreBuildErrors: true,
+  // },
 };
 
 export default nextConfig;
